@@ -1,6 +1,19 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 
-// --- CONFIGURACIÓN Y CONSTANTES ---
+// --- CONSTANTES BASE DE WHATSAPP ---
+// Número de WhatsApp predeterminado (Thomas y Yulianyiz)
+const WHATSAPP_DEFAULT_NUMBER = "573003804297";
+const WHATSAPP_DEFAULT_TEXT = "¡Confirmado!%20Asistiré%20a%20la%20Revelación%20de%20Sexo.";
+const WHATSAPP_DEFAULT_LINK = `https://wa.me/${WHATSAPP_DEFAULT_NUMBER}?text=${WHATSAPP_DEFAULT_TEXT}`;
+
+// Constantes para el parámetro especial (kaleo=true)
+const WHATSAPP_KALEO_NUMBER = "573012749388";
+// Texto: "estoy interesado en la inviotación de revelación" (codificado)
+const WHATSAPP_KALEO_TEXT_ENCODED = "estoy%20interesado%20en%20la%20inviotación%20de%20revelación";
+const WHATSAPP_KALEO_LINK = `https://wa.me/${WHATSAPP_KALEO_NUMBER}?text=${WHATSAPP_KALEO_TEXT_ENCODED}`;
+
+
+// --- CONFIGURACIÓN Y CONSTANTES GENERALES ---
 
 // Fecha y hora del evento: Noviembre 15, 2025 17:00:00 (5 PM)
 const TARGET_DATE = new Date("November 15, 2025 17:00:00").getTime();
@@ -10,8 +23,6 @@ const BACKGROUND_URL = "https://github.com/jefeRivas/iglesia-frontend/blob/main/
 const HERO_IMAGE_URL = "https://github.com/jefeRivas/iglesia-frontend/blob/main/public/WhatsApp%20Image%202025-10-31%20at%209.31.29%20PM.jpeg?raw=true";
 // Enlace externo para la ubicación del evento (Se mantiene solo como constante)
 const LOCATION_MAP_LINK = "https://maps.app.goo.gl/TUw9X35k72v5Q5o77"; 
-// Número de WhatsApp (ejemplo, se recomienda usar el formato completo con código de país)
-const WHATSAPP_LINK = "https://wa.me/573003804297?text=¡Confirmado!%20Asistiré%20a%20la%20Revelación%20de%20Sexo.";
 
 // URLs para las fotos de los padres
 const IMAGE_MOM_URL = "https://github.com/jefeRivas/iglesia-frontend/blob/main/public/WhatsApp%20Image%202025-10-31%20at%209.32.15%20PM.jpeg?raw=true";
@@ -145,6 +156,23 @@ const InstructionsModal = ({ show, onClose }) => {
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
+  // Estado para el enlace de WhatsApp que se calculará al montar
+  const [whatsappLink, setWhatsappLink] = useState(WHATSAPP_DEFAULT_LINK);
+
+  // Hook para calcular el enlace de WhatsApp basado en la URL
+  useEffect(() => {
+    // Si estamos en un entorno de navegador, obtenemos los parámetros de la URL
+    if (typeof window !== 'undefined') {
+        const urlParams = new URLSearchParams(window.location.search);
+        const isKaleo = urlParams.get('kaleo') === 'true';
+
+        if (isKaleo) {
+            setWhatsappLink(WHATSAPP_KALEO_LINK);
+        } else {
+            setWhatsappLink(WHATSAPP_DEFAULT_LINK);
+        }
+    }
+  }, []); // Se ejecuta solo una vez al montar
 
   // IntersectionObserver Hooks para cada sección
   const [countdownRef, isCountdownVisible] = useIntersectionObserver({ threshold: 0.1 });
@@ -156,7 +184,7 @@ const App = () => {
 
   // Función de utilería para las clases de animación
   const getAnimationClasses = useCallback((isVisible, delay = 0) => {
-    // Usamos la interpolación de milisegundos directamente en el className.
+    // Usamos la interpolación de milisegundos directamente en la className.
     // Tailwind usa la convención `delay-[number]`
     return isVisible
       ? `opacity-100 translate-y-0 transition-all duration-700 ease-out delay-[${delay}ms]`
@@ -317,7 +345,7 @@ const App = () => {
         >
           {/* ELIMINADO: Anteriormente aquí estaba el botón "Ver Ubicación" */}
           <a
-            href={WHATSAPP_LINK}
+            href={whatsappLink} // Usamos el estado dinámico
             target="_blank"
             rel="noopener noreferrer"
             className="w-full py-3 text-white font-extrabold text-lg uppercase rounded-full shadow-xl transition-all duration-300 
