@@ -9,7 +9,7 @@ const WHATSAPP_DEFAULT_LINK = `https://wa.me/${WHATSAPP_DEFAULT_NUMBER}?text=${W
 // Constantes para el parámetro especial (kaleo=true)
 const WHATSAPP_KALEO_NUMBER = "573012749388";
 // Texto: "estoy interesado en la inviotación de revelación" (codificado)
-const WHATSAPP_KALEO_TEXT_ENCODED = "estoy%20interesado%20en%20la%20inviotación%20de%20revelación";
+const WHATSAPP_KALEO_TEXT_ENCODED = "estoy%20interesado%20en%20la%20invitación%20de%20revelación";
 const WHATSAPP_KALEO_LINK = `https://wa.me/${WHATSAPP_KALEO_NUMBER}?text=${WHATSAPP_KALEO_TEXT_ENCODED}`;
 
 
