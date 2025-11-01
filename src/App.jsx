@@ -122,10 +122,7 @@ const InstructionsModal = ({ show, onClose }) => {
           </li>
           <li className="flex items-start">
             <span className="text-indigo-500 font-bold mr-2 text-xl">★</span>
-            <p><strong>Regalos:</strong> No son necesarios, tu presencia es el mejor regalo.<br><br>
-Pero si deseas traer algo, ¡será bienvenido! 💫 <br>
-Si crees que es niño, trae pañales 👶🩵 <br>
-Si crees que es niña, trae implementos de aseo 👶💗</p>
+            <p><strong>Regalos:</strong> No son necesarios, tu presencia es el mejor regalo.<br><br>Pero si deseas traer algo, ¡será bienvenido! 💫 <br>Si crees que es niño, trae pañales 👶🩵 <br>Si crees que es niña, trae implementos de aseo 👶💗</p>
           </li>
           <li className="flex items-start">
             <span className="text-pink-500 font-bold mr-2 text-xl">★</span>
